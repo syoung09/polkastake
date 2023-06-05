@@ -1,3 +1,8 @@
+provider "aws" {
+  profile = "default"
+  region  = var.aws_region_A
+}
+
 resource "aws_vpc" "polkastake_A" {
   cidr_block           = var.vpc_cidr_A
   enable_dns_hostnames = true
@@ -19,7 +24,7 @@ resource "aws_subnet" "polkastake_A" {
 resource "aws_security_group" "polkastake_fullnode_A" {
   name        = "polkastake_sg_A"
   description = "polkadot fullnode_A traffic"
-  vpc_id      = aws_vpc.polkastake_A
+  vpc_id      = var.vpc_cidr_A
 
   ingress {
     description = "ICMP"
@@ -77,7 +82,7 @@ resource "aws_instance" "polkastake_fullnode_A" {
   instance_type          = var.instance_type
   private_ip             = var.fullnode_ip_A
   subnet_id              = aws_subnet.polkastake_A.id
-  vpc_security_group_ids = [aws_security_group.polkastake.id]
+  vpc_security_group_ids = [aws_security_group.polkastake_fullnode_A.id]
   availability_zone      = var.aws_az_A
   key_name               = aws_key_pair.ansible.key_name
 }
@@ -90,9 +95,9 @@ resource "aws_eip" "polkastake_fullnode_A" {
 }
 
 resource "aws_route53_record" "fullnode_a" {
-  zone_id = aws_route53_zone.roflolz.id
+  zone_id = aws_route53_zone.roflol.id
   name    = "fullnode-a.roflol.net"
   type    = "A"
   ttl     = "60"
-  records = [aws_eip.aws_instance.polkastake_fullnode_A]
+  records = [aws_eip.polkastake_fullnode_A.public_ip]
 }
