@@ -10,6 +10,8 @@ resource "aws_vpc" "polkastake_A" {
 
 resource "aws_internet_gateway" "polkastake_A" {
   vpc_id = aws_vpc.polkastake_A.id
+
+  depends_on = [aws_vpc.polkastake_A]
 }
 
 resource "aws_subnet" "polkastake_A" {
@@ -24,7 +26,7 @@ resource "aws_subnet" "polkastake_A" {
 resource "aws_security_group" "polkastake_fullnode_A" {
   name        = "polkastake_sg_A"
   description = "polkadot fullnode_A traffic"
-  vpc_id      = var.vpc_cidr_A
+  vpc_id      = aws_vpc.polkastake_A.id
 
   ingress {
     description = "ICMP"
@@ -60,6 +62,8 @@ resource "aws_security_group" "polkastake_fullnode_A" {
   tags = {
     Name = "polkastake_sg_A"
   }
+
+  depends_on = [aws_vpc.polkastake_A]
 }
 
 resource "aws_route_table" "polkastake_A" {
