@@ -98,9 +98,9 @@ resource "aws_eip" "polkastake_fullnode_A" {
   vpc                       = true
 }
 
-resource "aws_route53_record" "fullnode_a" {
+resource "aws_route53_record" "fullnode_A" {
   zone_id = aws_route53_zone.roflol.id
-  name    = "fullnode-a.roflol.net"
+  name    = "roflol-a.roflol.net"
   type    = "A"
   ttl     = "60"
   records = [aws_eip.polkastake_fullnode_A.public_ip]
