@@ -57,3 +57,13 @@ variable "instance_ami" {
   type    = string
   default = "ami-09faf71ea24d57248"
 }
+
+variable "fullnode_name_A" {
+  type    = string
+  default = "roflol-a.roflol.com"
+}
+
+variable "fullnode_name_B" {
+  type    = string
+  default = "roflol-b.roflol.com"
+}

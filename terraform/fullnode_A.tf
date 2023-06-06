@@ -100,7 +100,7 @@ resource "aws_eip" "polkastake_fullnode_A" {
 
 resource "aws_route53_record" "fullnode_A" {
   zone_id = aws_route53_zone.roflol.id
-  name    = "roflol-a.roflol.net"
+  name    = var.fullnode_name_A
   type    = "A"
   ttl     = "60"
   records = [aws_eip.polkastake_fullnode_A.public_ip]
