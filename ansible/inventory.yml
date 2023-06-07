@@ -10,9 +10,9 @@ all:
     fullnodes:
       vars:
       hosts:
-        roflol-a:
-          ansible_host: roflol-a.roflol.net
+        rofl:
+          ansible_host: rofl.roflol.net
           node_role: full
-        roflol-b:
-          ansible_host: roflol-b.roflol.net
+        lol:
+          ansible_host: lol.roflol.net
           node_role: full

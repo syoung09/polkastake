@@ -1,69 +1,24 @@
-variable "aws_region_A" {
-  type    = string
+variable "region" {
+  type = string
   default = "us-west-2"
 }
 
-variable "aws_region_B" {
-  type    = string
-  default = "us-west-2"
-}
-
-variable "aws_az_A" {
-  type    = string
-  default = "us-west-2b"
-}
-
-variable "aws_az_B" {
-  type    = string
+variable "availability_zone" {
+  type = string
   default = "us-west-2c"
 }
 
-variable "vpc_cidr_A" {
-  type    = string
-  default = "10.0.0.0/22"  
+variable "cidr_block" {
+  type = string
+  default = "10.1.0.0/16"
 }
 
-variable "vpc_cidr_B" {
-  type    = string
-  default = "10.1.0.0/22"  
+variable "fullnode_name" {
+  type = string
+  default = "lol.roflol.net"
 }
 
-variable "subnet_pub_A" {
-  type    = string
-  default = "10.0.0.0/22"  
-}
-
-variable "subnet_pub_B" {
-  type    = string
-  default = "10.1.0.0/22"  
-}
-
-variable "fullnode_ip_A" {
-  type    = string
-  default = "10.0.0.99"
-}
-
-variable "fullnode_ip_B" {
-  type    = string
+variable "fullnode_private_ip" {
+  type = string
   default = "10.1.0.99"
-}
-
-variable "instance_type" {
-  type    = string
-  default = "t3.medium" //c6i.4xlarge
-}
-
-variable "instance_ami" {
-  type    = string
-  default = "ami-09faf71ea24d57248"
-}
-
-variable "fullnode_name_A" {
-  type    = string
-  default = "roflol-a.roflol.com"
-}
-
-variable "fullnode_name_B" {
-  type    = string
-  default = "roflol-b.roflol.com"
 }

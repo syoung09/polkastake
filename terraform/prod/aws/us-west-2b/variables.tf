@@ -15,7 +15,7 @@ variable "cidr_block" {
 
 variable "fullnode_name" {
   type = string
-  default = "roflol-a.roflol.net"
+  default = "rofl.roflol.net"
 }
 
 variable "fullnode_private_ip" {
