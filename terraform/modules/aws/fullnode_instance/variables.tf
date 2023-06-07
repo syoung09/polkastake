@@ -11,7 +11,7 @@ variable "private_ip" {
 }
 
 variable "security_group_ids" {
-  type = [string]
+  type = list(string)
 }
 
 variable "name" {

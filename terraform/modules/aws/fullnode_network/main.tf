@@ -48,7 +48,7 @@ resource "aws_main_route_table_association" "rta" {
 resource "aws_security_group" "polkastake_fullnode" {
   name        = "polkastake_sg"
   description = "polkadot fullnode traffic"
-  vpc_id      = module.vpc.id
+  vpc_id      = aws_vpc.vpc
 
   ingress {
     description = "ICMP"
