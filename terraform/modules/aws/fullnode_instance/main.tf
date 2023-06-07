@@ -15,73 +15,25 @@ provider "aws" {
   region  = var.region
 }
 
-resource "aws_vpc" "vpc" {
-  cidr_block = var.cidr_block
-  enable_dns_hostnames = true
+resource "aws_instance" "ec2" {
+    ami = "ami-09faf71ea24d57248"
+    instance_type = "t3.medium" //c6i.4xlarge
+    key_name = "ansible"
+    subnet_id = var.subnet_id
+    private_ip = var.private_ip
+    vpc_security_group_ids = var.security_group_ids
 }
 
-resource "aws_subnet" "subnet" {
-  vpc_id            = aws_vpc.vpc
-  cidr_block        = cidrsubnet(var.cidr_block, 6, 0)
-  availability_zone = var.availability_zone
-  map_public_ip_on_launch = true
+resource "aws_eip" "eip" {
+  instance                  = aws_instance.ec2.id
+  associate_with_private_ip = var.private_ip
+  vpc                       = true
 }
 
-resource "aws_internet_gateway" "aig" {
-  vpc_id = aws_vpc.vpc
-}
-
-resource "aws_route_table" "rt" {
-  vpc_id = aws_vpc.vpc
-
-  route {
-    cidr_block = "0.0.0.0/0"
-    gateway_id = aws_internet_gateway.aig
-  }
-}
-
-resource "aws_main_route_table_association" "rta" {
-  vpc_id         = aws_vpc.vpc.id
-  route_table_id = aws_route_table.rt.id
-}
-
-resource "aws_security_group" "polkastake_fullnode" {
-  name        = "polkastake_sg"
-  description = "polkadot fullnode traffic"
-  vpc_id      = module.vpc.id
-
-  ingress {
-    description = "ICMP"
-    from_port   = -1
-    to_port     = -1
-    protocol    = "icmp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  ingress {
-    description = "fullnode_libp2p"
-    from_port   = 30333
-    to_port     = 30333
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  ingress {
-    description = "SSH"
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  tags = {
-    Name = "polkastake_sg"
-  }
+resource "aws_route53_record" "record" {
+  zone_id = "Z081198922FL51CN10THU"
+  name    = var.name
+  type    = A
+  ttl     = 60
+  records = [aws_eip.eip.public_ip]
 }
