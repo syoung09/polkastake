@@ -1,8 +1,13 @@
 # polkastake
 
-Used to build a pair of Polkadot validators in AWS. 
+Used to build a pair of Polkadot fullnodes in AWS; one region, two AZs.
 
-References:
+To run the playbook serially one node at a time pass `-e serialvar=1` in the ansible-playbook command.
+
+Fullnodes can be quickly upgraded with minimal downtime by changing the `node_binary_version` to the desired version then running the playbook as usual.
+
+References
+------------
 
 [Run a Validator (Polkadot)](https://wiki.polkadot.network/docs/maintain-guides-how-to-validate-polkadot)
 
