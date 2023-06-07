@@ -15,5 +15,5 @@ variable "security_group_ids" {
 }
 
 variable "name" {
- type = string 
+  type = string
 }
