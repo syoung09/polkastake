@@ -33,7 +33,7 @@ resource "aws_eip" "eip" {
 resource "aws_route53_record" "record" {
   zone_id = "Z081198922FL51CN10THU"
   name    = var.name
-  type    = A
+  type    = "A"
   ttl     = 60
   records = [aws_eip.eip.public_ip]
 }
