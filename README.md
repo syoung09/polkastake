@@ -4,7 +4,8 @@ Used to build a pair of Polkadot fullnodes in AWS; one region, two AZs.
 
 To run the playbook serially one node at a time pass `-e serialvar=1` in the ansible-playbook command.
 
-Fullnodes can be quickly upgraded with minimal downtime by changing the `node_binary_version` to the desired version then running the playbook as usual.
+Fullnodes can be quickly upgraded with minimal downtime by changing the *node_binary_version* in `inventory.yml` to the desired version then running the playbook as usual.
+
 
 References
 ------------
