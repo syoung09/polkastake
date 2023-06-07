@@ -5,7 +5,7 @@ module "network" {
   availability_zone = var.availability_zone
 }
 
-module "fullnode_instance" {
+module "fullnode" {
   source             = "../../../modules/aws/fullnode_instance"
   region             = var.region
   subnet_id          = module.network.subnet_id
