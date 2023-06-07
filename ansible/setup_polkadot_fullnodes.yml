@@ -1,6 +1,10 @@
 ---
 - hosts: fullnodes
+  serial: "{{ serialvar }}"
   remote_user: ubuntu
+
+  vars:
+    serialvar: 2
 
   roles:
     - { role: parity.chain.node, tags: node, become: yes }
