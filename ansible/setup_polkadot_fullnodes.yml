@@ -1,0 +1,6 @@
+---
+- hosts: fullnodes
+  remote_user: ubuntu
+
+  roles:
+    - { role: parity.chain.node, tags: node, become: yes }
